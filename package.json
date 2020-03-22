@@ -1,5 +1,5 @@
 {
-  "name": "shipIT",
+  "name": "DavidKayce-ShipIT",
   "version": "0.1.0",
   "description": "Bootstrap project for Chaincodes shipIT",
   "files": [
@@ -14,7 +14,6 @@
     "cc:start": "f() { npm run cc:package -- $1; npm run cc:install $1 $2; }; f", 
     "cc:upgrade": "f() { npm run cc:package -- $1; hurl upgrade ${3:-$1} node $2  -P ./chaincode-$1; }; f", 
     "cc:start:debug": "f() { npm run cc:package -- $1; npm run cc:install:debug $1 $2; }; f", 
-    "===================INTERNALS===================": "===================NO NEED TO CALL THEM DIRECTLY===================", 
     "lerna:install": "lerna bootstrap", 
     "lerna:build": "lerna run build", 
     "cc:package": "f() { npm run lerna:build; chaincode-manager --update --config ./$1.config.json --output ./chaincode-$1 package; }; f", 
