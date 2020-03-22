@@ -1,0 +1,11 @@
+{
+  "txTimeout": 300000,
+  "skipInit": true,
+  "controllers": [
+    {
+      "name": "shipIT-cc",
+      "version": "file:./packages/shipIT-cc",
+      "controller": "ShipITController"
+    }
+  ]
+}
