@@ -7,7 +7,7 @@ By default new Convector projects locally include <a href="https://github.com/wo
 
 ```
 # Install dependencies - From the root of your project
-npm i
+npm install
 # Create a new development blockchain network  - From the root of your project
 npm run env:restart
 # Install your smart contract
@@ -88,16 +88,3 @@ npm run cc:start -- shipIT
 # Upgrade your existing chaincode - From the root of your project
 npm run cc:upgrade -- shipIT 1.2
 ```
-
-## Tests
-
-```
-npm run test
-```
-
-> Check all the information to work with Convector <a href="https://docs.covalentx.com/convector" target="_blank">in the DOCS site</a>.
-
-## Collaborate to the Convector Suite projects
-
-* <a href="https://community.covalentx.com" target="_blank">Discord chat with the community</a>
-* <a href="https://github.com/worldsibu" target="_blank">Convector projects</a>
