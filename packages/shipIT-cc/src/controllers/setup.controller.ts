@@ -21,6 +21,10 @@ export class SetupController extends ConvectorController<ChaincodeTx> {
       new Bill({ id: 'id5', owner: 'Aisosa', created: 1590979797, modified: 27897597 }),
       new Bill({ id: 'id6', owner: 'Toyos', created: 1590979800, modified: 27897597 })
     ]
-    await Promise.all(MockData.map((bill: Bill) => bill.save()));
+    try {
+      await Promise.all(MockData.map((bill: Bill) => bill.save()));
+    } catch (error) {
+      throw new Error('Cannot set up the ledger, please try again');
+    }
   }
 }

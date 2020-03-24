@@ -31,7 +31,11 @@ export class BillController extends ConvectorController<ChaincodeTx> {
   public async addBill(
     @Param(Bill) bill: Bill
   ): Promise<void> {
-    await bill.save()
+    try {
+      await bill.save();
+    } catch (error) {
+      throw new Error('Cannot add this bill, please try again');
+    }
   }
 
 
@@ -41,8 +45,12 @@ export class BillController extends ConvectorController<ChaincodeTx> {
     @Param(yup.string()) field: string,
     value: any
   ): Promise<void> {
-    const bill = await Bill.getOne(id);
-    bill[field] = value; 
-    return bill.save();
+    try {
+      const bill = await Bill.getOne(id);
+      bill[field] = value;
+      return bill.save();
+    } catch (error) {
+      throw new Error('Cannot edit this bill, please try again');
+    }
   }
 }

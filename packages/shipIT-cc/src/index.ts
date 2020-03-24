@@ -1,2 +1,2 @@
-export * from './shipIT.model';
-export * from './shipIT.controller';
+import { BillController } from './controllers';
+import { Bill } from './models';
