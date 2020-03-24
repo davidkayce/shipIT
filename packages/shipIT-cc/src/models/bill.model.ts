@@ -7,14 +7,20 @@ import {
   Validate
 } from '@worldsibu/convector-core-model';
 
-export class ShipIT extends ConvectorModel<ShipIT> {
-  @ReadOnly()
+export class Bill extends ConvectorModel<Bill> {
+  @ReadOnly() 
   @Required()
-  public readonly type = 'io.worldsibu.shipIT';
+  public readonly type = 'io.worldsibu.bill';
 
   @Required()
+  @ReadOnly() // Meaning it cannot be changed once it is set
   @Validate(yup.string())
-  public name: string;
+  public id: string;
+
+  @Required() 
+  @ReadOnly()
+  @Validate(yup.string())
+  public owner: string;
 
   @ReadOnly()
   @Required()
