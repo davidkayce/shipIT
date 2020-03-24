@@ -8,7 +8,7 @@
   "scripts": {
     "install": "npm-run-all -s lerna:install",
     "upgrade": "npm --depth 9999 update && npx npm-check-updates -u && npm i",
-    "env:restart": "hurl new",
+    "env:restart": "hurl new -o 5",
     "test": "npm-run-all -s lerna:test",
     "test:e2e": "npm-run-all -s lerna:test:e2e",
     "env:clean": "hurl clean",
@@ -31,5 +31,8 @@
     "fabric-client": "~1.4.8",
     "lerna": "^3.20.2",
     "npm-run-all": "~4.1.5"
+  },
+  "dependencies": {
+    "@types/yup": "^0.26.33"
   }
 }

@@ -1,1 +1,2 @@
-import * from './bill.controller';
+export * from './bill.controller';
+export * from './setup.controller';
