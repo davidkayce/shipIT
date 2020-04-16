@@ -1,0 +1,32 @@
+{
+  "name": "@worldsibu/convector-example-dsc-cc-transport",
+  "version": "1.0.0",
+  "description": "",
+  "author": "WorldSibu",
+  "license": "Apache-2.0",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist/*",
+    "client/*"
+  ],
+  "scripts": {
+    "------------ STANDARD TASKS ------------": "",
+    "clean": "rimraf dist client",
+    "build": "npm run clean && tsc",
+    "prepare": "npm run build",
+    "test": "npm run build && mocha -r ts-node/register tests/*.spec.ts --reporter spec"
+  },
+  "dependencies": {
+    "@worldsibu/convector-core": "~1.3.3",
+    "@worldsibu/convector-example-dsc-cc-participant": "^1.0.0",
+    "reflect-metadata": "^0.1.12",
+    "yup": "^0.24.1"
+  },
+  "devDependencies": {
+    "@worldsibu/convector-adapter-mock": "~1.3.3",
+    "@worldsibu/convector-core-adapter": "~1.3.3",
+    "ts-node": "^7.0.0",
+    "typescript": "2.9.2"
+  }
+}

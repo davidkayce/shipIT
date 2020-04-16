@@ -1,0 +1,48 @@
+{
+  "name": "@worldsibu/convector-example-dsc-server",
+  "version": "1.0.0",
+  "description": "",
+  "author": "WorldSibu",
+  "license": "Apache-2.0",
+  "main": "./dist/src/app.js",
+  "private": true,
+  "scripts": {
+    "start": "pm2-runtime pm2.config.json",
+    "start:dev": "npm run tsc -- -w & npm run start",
+    "start:org1:user1": "export USERCERT=user1 && npm run start:dev",
+    "start:org1:user2": "export USERCERT=user2 && npm run start:dev",
+    "start:org1:user3": "export USERCERT=user3 && npm run start:dev",
+    "start:daemon": "pm2 startOrRestart pm2.config.json --no-daemon",
+    "stop": "pm2 stop pm2.config.json",
+    "tsc": "tsc",
+    "clean": "rimraf dist client",
+    "refresh": "./node_modules/pm2/bin/pm2 stop 0 && ./node_modules/pm2/bin/pm2 start 0",
+    "build": "npm run clean && tsc",
+    "prepare": "npm run build",
+    "docker:build": "docker build -t worldsibu/convector-example-dsc .",
+    "docker:build:nocache": "docker build -t worldsibu/convector-example-dsc . --no-cache",
+    "test": "mocha -r ts-node/register test/*.spec.ts --reporter spec",
+    "userContext": "node -e 'let selfEnroll = require(\"./dist/convectorUtils/selfGenContext.js\"); selfEnroll.SelfEnroll.getClient()'"
+  },
+  "dependencies": {
+    "@angular/animations": "^7.2.5",
+    "@worldsibu/convector-adapter-fabric": "~1.3.3",
+    "@worldsibu/convector-example-dsc-cc-drug": "1.0.0",
+    "@worldsibu/convector-example-dsc-cc-participant": "1.0.0",
+    "@worldsibu/convector-example-dsc-cc-transport": "^1.0.0",
+    "@worldsibu/convector-storage-couchdb": "~1.3.3",
+    "body-parser": "^1.18.3",
+    "config": "^1.30.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "node-couchdb": "^1.3.0",
+    "x509": "^0.3.3"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "pm2": "^3.3.0",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.0",
+    "typescript": "2.9.2"
+  }
+}
