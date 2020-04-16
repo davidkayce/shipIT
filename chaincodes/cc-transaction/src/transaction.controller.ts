@@ -7,7 +7,7 @@ import {
 } from '@worldsibu/convector-core';
 import { ChaincodeTx } from '@worldsibu/convector-core-chaincode';
 
-import { Drug } from './drug.model';
+import { Drug } from './transaction.model';
 import { ParticipantController } from '@worldsibu/convector-example-dsc-cc-participant';
 import { Transport } from '@worldsibu/convector-example-dsc-cc-transport';
 import { History } from '@worldsibu/convector-core';

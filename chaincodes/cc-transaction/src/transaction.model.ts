@@ -5,9 +5,9 @@ import {
   Required,
   Validate,
   Default,
+  Unique
   FlatConvectorModel
 } from '@worldsibu/convector-core';
-import { Report } from './report.model';
 
 export class Drug extends ConvectorModel<Drug> {
   @ReadOnly()
@@ -15,21 +15,60 @@ export class Drug extends ConvectorModel<Drug> {
 
   @ReadOnly()
   @Required()
+  @Validate(yup.integer())
+  public registryNumber: number;
+
+  @ReadOnly()
+  @Required()
   @Validate(yup.string())
-  public name: string;
+  public exporterName: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
+  public exporterAddress: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
+  public consigneeName: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
+  public consigneeAddress: string;
 
   @Required()
   @Validate(yup.string())
-  /** Current user owning the drug. */
-  public holderId: string;
+  public goodsDescription: string;
+
+  @Required()
+  @Validate(yup.integer())
+  public numberOfContainers: number;
+
+  @Required()
+  @Validate(yup.integer())
+  public grossMassManifested: number;
 
   @Validate(yup.string())
-  /** Current user owning the drug. */
-  public transportId: string;
+  public bolReference: string;
 
-  @Validate(yup.array(Report.schema()))
-  /** Current user owning the drug. */
-  public reports: Array<FlatConvectorModel<Report>>;
+  @Validate(yup.string())
+  public bolTypeSegmentCode: string;
+
+  @Validate(yup.integer())
+  public bolNature: number;
+
+  // Customs
+
+  @Validate(yup.string())
+  public customsOfficeCode: string;
+
+  @Validate(yup.string())
+  public customsOfficeName: string;
+
+  @Validate(yup.integer())
+  public lineNumber: number;
 
   @Validate(yup.number())
   /** Date in which it was modified. */
