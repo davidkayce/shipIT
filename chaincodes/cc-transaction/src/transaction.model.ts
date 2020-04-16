@@ -4,9 +4,6 @@ import {
   ReadOnly,
   Required,
   Validate,
-  Default,
-  Unique
-  FlatConvectorModel
 } from '@worldsibu/convector-core';
 
 export class Drug extends ConvectorModel<Drug> {
@@ -37,6 +34,11 @@ export class Drug extends ConvectorModel<Drug> {
   @Required()
   @Validate(yup.string())
   public consigneeAddress: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
+  public notifySegmentAddress: string;
 
   @Required()
   @Validate(yup.string())
@@ -69,6 +71,56 @@ export class Drug extends ConvectorModel<Drug> {
 
   @Validate(yup.integer())
   public lineNumber: number;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public placeOfLoadingCode: string;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public placeOfLoadingName: string;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public placeOfLoadingRegion: string;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public placeOfUnloadingCode: string;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public placeOfUnloadingName: string;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public placeOfUnloadingRegion: string;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public packageTypeCode: string;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public packageTypeName: string;
+
+  @ReadOnly()
+  @Validate(yup.integer())
+  public numberOfPackages: number;
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public referenceKey: string;
+
+  @ReadOnly()
+  @Validate(yup.integer())
+  public manifestID: number;
+
+  @Validate(yup.integer())
+  public manifestStageID: string;
+  
+
+  //Utils
 
   @Validate(yup.number())
   /** Date in which it was modified. */
