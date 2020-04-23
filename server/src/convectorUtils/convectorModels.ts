@@ -1,18 +1,13 @@
 import { BaseStorage } from '@worldsibu/convector-core';
 import { CouchDBStorage } from '@worldsibu/convector-storage-couchdb';
-import { Transport as TransportModel, Transport } from '@worldsibu/convector-example-dsc-cc-transport';
-import { Drug as DrugModel } from '@worldsibu/convector-example-dsc-cc-drug';
-import { Participant as ParticipantModel } from '@worldsibu/convector-example-dsc-cc-participant';
+import { Transaction as TransactionModel } from '../../../chaincodes/cc-transaction';
+import { User as UserModel } from '../../../chaincodes/cc-user';
 
-export { Drug } from '@worldsibu/convector-example-dsc-cc-drug';
-export { Transport } from '@worldsibu/convector-example-dsc-cc-transport';
-export { Participant } from '@worldsibu/convector-example-dsc-cc-participant';
+export { Transaction } from '../../../chaincodes/cc-transaction';
+export { User } from '../../../chaincodes/cc-user';
+import { channel, transactionCC, couchDBHost, couchDBProtocol, couchDBPort, couchDBView } from './env';
 
-import { channel, drugCC, couchDBHost, couchDBProtocol, couchDBPort, couchDBView } from './env';
-
-/**
- * Route to the CouchDB
- */
+// Route to the CouchDB
 BaseStorage.current = new CouchDBStorage({
   host: couchDBHost,
   protocol: couchDBProtocol,
@@ -20,31 +15,26 @@ BaseStorage.current = new CouchDBStorage({
 }, couchDBView);
 
 export namespace ModelHelpers {
-  export async function formatDrug(drug: DrugModel): Promise<any> {
-    const drugObj = drug.toJSON();
-    (drugObj as any).holder = await formatParticipant(await Participant.getOne(drugObj.holderId));
-    return drugObj;
-  }
-  export async function formatTransport(transport: TransportModel): Promise<any> {
-    const transportObj = transport.toJSON();
-    (transportObj as any).owner = await formatParticipant(await Participant.getOne(transportObj.ownerId));
-    return transportObj;
+  export async function formatTransaction(trxn: TransactionModel): Promise<any> {
+    const trxnObj = trxn.toJSON();
+    (trxnObj as any).holder = await formatParticipant(await User.getOne(trxnObj.holderId));
+    return trxnObj;
   }
 
-  export async function formatParticipant(participant: ParticipantModel): Promise<any> {
+  export async function formatParticipant(participant: UserModel): Promise<any> {
     const participantObj = participant.toJSON();
     return participantObj;
   }
 
-  export async function getAllDrugs() {
-    const cc = drugCC;
+  export async function getAllTransactions() {
+    const cc = transactionCC;
     const dbName = `${channel}_${cc}`;
     const viewUrl = '_design/drugs/_view/all';
 
     const queryOptions = { startKey: [''], endKey: [''] };
 
     try {
-      const result = <DrugModel[]>(await Drug.query(Drug, dbName, viewUrl, queryOptions));
+      const result = <TransactionModel[]>(await Drug.query(Transaction, dbName, viewUrl, queryOptions));
       return await Promise.all(result.map(ModelHelpers.formatDrug));
     } catch (err) {
       console.log(err);
@@ -56,35 +46,15 @@ export namespace ModelHelpers {
     }
   }
 
-  export async function getAllTransport() {
-    const cc = drugCC;
-    const dbName = `${channel}_${cc}`;
-    const viewUrl = '_design/transports/_view/all';
-
-    const queryOptions = { startKey: [''], endKey: [''] };
-
-    try {
-      const result = <TransportModel[]>(await Transport.query(Transport, dbName, viewUrl, queryOptions));
-      return await Promise.all(result.map(ModelHelpers.formatTransport));
-    } catch (err) {
-      console.log(err);
-      if (err.code === 'EDOCMISSING') {
-        return [];
-      } else {
-        throw err;
-      }
-    }
-  }
-
-  export async function getAllParticipants() {
-    const cc = drugCC;
+  export async function getAllUsers() {
+    const cc = transactionCC;
     const dbName = `${channel}_${cc}`;
     const viewUrl = '_design/participants/_view/all';
 
     const queryOptions = { startKey: [''], endKey: [''] };
 
     try {
-      const result = <ParticipantModel[]>(await Participant.query(Participant, dbName, viewUrl, queryOptions));
+      const result = <UserModel[]>(await User.query(User, dbName, viewUrl, queryOptions));
       return await Promise.all(result.map(formatParticipant));
     } catch (err) {
       console.log(err);
@@ -96,7 +66,6 @@ export namespace ModelHelpers {
     }
   }
 
-  export const Drug = DrugModel;
-  export const Transport = TransportModel;
-  export const Participant = ParticipantModel;
+  export const Drug = TransactionModel;
+  export const User = UserModel;
 }

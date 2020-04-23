@@ -3,7 +3,7 @@ import { identities } from '../identities';
 dotenv.config();
 const homedir = require('os').homedir();
 
-export const drugCC = process.env.CHAINCODE || 'drug';
+export const transactionCC = process.env.CHAINCODE || 'transaction';
 export const channel = process.env.CHANNEL || 'ch1';
 
 // Automatically extract credentials by the user id

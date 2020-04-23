@@ -1,9 +1,8 @@
 import * as crypto from 'crypto';
 import { Router, Request, Response } from 'express';
-
 import {
   ModelHelpers,
-  InitDrugController,
+  InitTransactionController,
   userCert,
   identity
 } from '../convectorUtils';
@@ -17,29 +16,28 @@ InitServerIdentity();
 /** Get all the users */
 router.get('/users', async (req: Request, res: Response) => {
   try {
-    res.send(await ModelHelpers.getAllParticipants());
+    res.send(await ModelHelpers.getAllUsers());
   } catch (err) {
     console.log(JSON.stringify(err));
     res.status(500).send(err);
   }
 });
 
-/** Get all the drugs! */
+/** Get all the transactions! */
 router.get('/', async (req: Request, res: Response) => {
   try {
-    res.send((await ModelHelpers.getAllDrugs()).reverse());
+    res.send((await ModelHelpers.getAllTransactions()).reverse());
   } catch (err) {
     console.log(JSON.stringify(err));
     res.status(500).send(err);
   }
 });
 
-/** Get drug history! */
+/** Get transaction history! */
 router.get('/:id/history', async (req: Request, res: Response) => {
   try {
     let { id } = req.params;
-
-    let cntrl = await InitDrugController();
+    let cntrl = await InitTransactionController();
     let result = await cntrl.getHistory(id);
     res.send(result);
   } catch (err) {
@@ -53,17 +51,16 @@ router.get('/:id/history', async (req: Request, res: Response) => {
   }
 });
 
-/** Transfer the holder of the drug in the value chain. */
+/** Transfer the holder of the transaction in the value chain. */
 router.post('/:id/transfer/', async (req: Request, res: Response) => {
   let { id } = req.params;
   let { to, reportHash, reportUrl, transportId } = req.body;
 
   try {
-    let cntrl = await InitDrugController();
+    let cntrl = await InitTransactionController();
     await cntrl.transfer(id, to, reportHash, reportUrl, transportId, Date.now());
-
-    // Return the drug after transfer
-    res.send(await ModelHelpers.formatDrug(await ModelHelpers.Drug.getOne(id)));
+    // Return the transaction after transfer
+    res.send(await ModelHelpers.formatTransaction(await ModelHelpers.Transaction.getOne(id)));
 
   } catch (err) {
     console.log(JSON.stringify(err));
@@ -71,21 +68,21 @@ router.post('/:id/transfer/', async (req: Request, res: Response) => {
   }
 });
 
-/** Insert one drug. */
+/** Insert one transaction. */
 router.post('/', async (req: Request, res: Response) => {
   let { id, name } = req.body;
 
   const fId = id || crypto.randomBytes(16).toString('hex');
 
   try {
-    let cntrl = await InitDrugController();
+    let cntrl = await InitTransactionController();
     await cntrl.create(id, name, identity, Date.now());
-    // Return the newly created drug
-    res.send(await ModelHelpers.formatDrug(await ModelHelpers.Drug.getOne(fId)));
+    // Return the newly created transaction
+    res.send(await ModelHelpers.formatTransaction(await ModelHelpers.Transaction.getOne(fId)));
   } catch (err) {
     console.log(JSON.stringify(err));
     res.status(500).send(err);
   }
 });
 
-export const DrugCtrl: Router = router;
+export const TransactionCtrl: Router = router;
