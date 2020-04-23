@@ -1,2 +1,2 @@
-export * from './participant.model';
-export * from './participant.controller';
+export * from './bank.model';
+export * from './bank.controller';

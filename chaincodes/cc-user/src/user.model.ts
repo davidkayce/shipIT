@@ -17,9 +17,7 @@ export const x509Identities = yup.object<x509Identities>().shape({
   fingerprint: yup.string().required()
 });
 
-export class Participant extends ConvectorModel<Participant> {
-  @ReadOnly()
-  public readonly type = 'io.worldsibu.examples.participant';
+export class User extends ConvectorModel<Participant> {
 
   @ReadOnly()
   @Required()
@@ -27,9 +25,20 @@ export class Participant extends ConvectorModel<Participant> {
   public name: string;
 
   @ReadOnly()
+  @Required()
   @Validate(yup.string())
-  public msp: string;
+  public email: string;
 
+  @ReadOnly()
+  @Validate(yup.string())
+  public phone: string;
+
+
+  @ReadOnly()
+  @Validate(yup.string())
+  public address: string;
+
+  // Provide unique identities for users 
   @Validate(yup.array(x509Identities))
   public identities: x509Identities[];
 

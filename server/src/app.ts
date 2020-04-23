@@ -1,5 +1,3 @@
-// @ts-check
-
 import * as express from 'express';
 import { DrugCtrl } from './controllers';
 import * as bodyParser from 'body-parser';

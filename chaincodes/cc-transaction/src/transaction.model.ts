@@ -6,9 +6,7 @@ import {
   Validate,
 } from '@worldsibu/convector-core';
 
-export class Drug extends ConvectorModel<Drug> {
-  @ReadOnly()
-  public readonly type = 'io.worldsibu.examples.drug';
+export class Transaction extends ConvectorModel<Transaction> {
 
   @ReadOnly()
   @Required()

@@ -11,8 +11,8 @@ import { ChaincodeTx } from '@worldsibu/convector-core-chaincode';
 import { Transaction } from './transaction.model';
 import { AgentController } from '@worldsibu/convector-example-dsc-cc-participant';
 
-@Controller('drug')
-export class DrugController extends ConvectorController<ChaincodeTx> {
+@Controller('transaction')
+export class TransactionController extends ConvectorController<ChaincodeTx> {
   @Invokable()
   public async create(
     @Param(yup.string())
@@ -25,20 +25,9 @@ export class DrugController extends ConvectorController<ChaincodeTx> {
     created: number
   ) {
     const exists = await Transaction.getOne(id);
-    if (exists.id === id) {
-      throw new Error('There is already one drug with that unique id');
-    }
-
-    let drug = new Drug(id);
-    drug.name = name;
-    drug.createdBy = this.sender;
-    drug.modifiedBy = this.sender;
-    drug.holderId = owner;
-
-    drug.created = created;
-    drug.modified = created;
-
-    await drug.save();
+    if (exists.id === id) throw new Error('There is already one drug with that unique id');
+    let trxn = new Transaction(id);
+    await trxn.save();
   }
 
   @Invokable()
@@ -94,8 +83,8 @@ export class DrugController extends ConvectorController<ChaincodeTx> {
   public async getHistory(
     @Param(yup.string())
     drugId: string
-  ): Promise<History<Drug>[]> {
-    let item = await Drug.getOne(drugId);
+  ): Promise<History<Transaction>[]> {
+    let item = await Transaction.getOne(id);
     return await item.history();
   }
 }
