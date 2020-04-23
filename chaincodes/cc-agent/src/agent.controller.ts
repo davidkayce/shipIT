@@ -8,7 +8,7 @@ import {
 } from '@worldsibu/convector-core';
 import { ChaincodeTx } from '@worldsibu/convector-core-chaincode';
 
-import { Participant } from './participant.model';
+import { Participant } from './agent.model';
 
 @Controller('participant')
 export class ParticipantController extends ConvectorController<ChaincodeTx> {

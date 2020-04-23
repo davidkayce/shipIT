@@ -3,14 +3,13 @@ import {
   Controller,
   ConvectorController,
   Invokable,
-  Param
+  Param, 
+  History
 } from '@worldsibu/convector-core';
 import { ChaincodeTx } from '@worldsibu/convector-core-chaincode';
 
 import { Transaction } from './transaction.model';
-import { ParticipantController } from '@worldsibu/convector-example-dsc-cc-participant';
-import { Transport } from '@worldsibu/convector-example-dsc-cc-transport';
-import { History } from '@worldsibu/convector-core';
+import { AgentController } from '@worldsibu/convector-example-dsc-cc-participant';
 
 @Controller('drug')
 export class DrugController extends ConvectorController<ChaincodeTx> {
@@ -25,8 +24,7 @@ export class DrugController extends ConvectorController<ChaincodeTx> {
     @Param(yup.number())
     created: number
   ) {
-    const exists = await Drug.getOne(id);
-
+    const exists = await Transaction.getOne(id);
     if (exists.id === id) {
       throw new Error('There is already one drug with that unique id');
     }
