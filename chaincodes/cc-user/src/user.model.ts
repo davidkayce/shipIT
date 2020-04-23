@@ -17,7 +17,7 @@ export const x509Identities = yup.object<x509Identities>().shape({
   fingerprint: yup.string().required()
 });
 
-export class User extends ConvectorModel<Participant> {
+export class User extends ConvectorModel<User> {
 
   @ReadOnly()
   @Required()
