@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { MetaDataKeys as Keys, RouteDescriptor, RouteMethods as R } from "../utils";
+import { MetaDataKeys as Keys, RouteDescriptor, RouteMethods as R } from "./utils";
 
 const routeBinder = (method: string): Function => {
   return (path: string): Function => {

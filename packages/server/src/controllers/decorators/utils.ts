@@ -9,9 +9,7 @@ export enum RouteMethods {
 }
 
 export enum MetaDataKeys {
-  path = 'path',
-  mid = 'middleware',
-  validator = 'validator'
+  path = 'path'
 }
 
 export interface RouteDescriptor extends PropertyDescriptor {
