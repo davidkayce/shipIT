@@ -14,7 +14,7 @@ import { Agency } from './agency.model';
 @Controller('participant')
 export class ParticipantController extends ConvectorController<ChaincodeTx> {
   @Invokable()
-  public async register(
+  public async registerUser(
     @Param(User)
     user: User,
   ) {

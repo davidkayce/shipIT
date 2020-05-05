@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { controller, post } from "./decorators";
+import { TransactionControllerBackEnd } from '../convector';
 
 @controller("/transaction")
 export class Transaction {
