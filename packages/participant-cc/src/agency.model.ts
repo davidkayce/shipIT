@@ -14,7 +14,7 @@ export class Agency extends ConvectorModel<Agency> {
         type: new Agency().type,
         identity: fingerprint
       }
-    }) as Agent[];
+    }) as Agency[];
 
     if (!agents.length) throw new Error(`No agent was found with fingerprint: ${fingerprint}`);
     return agents[0];

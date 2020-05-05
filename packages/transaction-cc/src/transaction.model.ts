@@ -68,7 +68,7 @@ export class Transaction extends ConvectorModel<Transaction> {
           })
       )
   )
-  public invoices: array[any];
+  public invoices: any[];
 
   //Utils
   @Required()

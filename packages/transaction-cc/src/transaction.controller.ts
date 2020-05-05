@@ -13,7 +13,7 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
     txn: Transaction
   ) {
     const existing = await Transaction.getOne(txn.id);
-    if (existing.id) throw new Error(`Batch with id ${batch.id} has been already registered`);
+    if (existing.id) throw new Error(`Batch with id ${txn.id} has been already registered`);
     const creator = await User.getFromFingerprint(this.sender);
     txn.createdBy = creator.id;
     await txn.save();
@@ -26,7 +26,7 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
   ) {
     const txn = await Transaction.getOne(txnId);
     if (!txn.id) throw new Error(`No txn found with id ${txn.id}`);
-    return txn.toJSON() as CoffeeGrainBatch;
+    return txn.toJSON() as Transaction;
   }
 
   @Invokable()
@@ -43,7 +43,7 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
     @Param(yup.string().oneOf(['agency', 'agent']))
     senderType: string
   ) {
-    const trxn = Transaction.getOne(txnId);
+    const trxn = await Transaction.getOne(txnId);
     if (!trxn) throw new Error(`No transaction found with id ${txnId}`);
     let handler;
     if (senderType === 'agency') {
@@ -60,12 +60,12 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
   public async updateTransaction(
     @Param(yup.string())
     txnId: string,
-    @Param(yup.string())
-    to: string,
     @Param(yup.string().oneOf(['agency', 'agent']))
-    senderType: string
+    senderType: string,
+    @Param(yup.object())
+    details: any
   ) {
-    const trxn = Transaction.getOne(txnId);
+    const trxn = await Transaction.getOne(txnId);
     if (!trxn) throw new Error(`No transaction found with id ${txnId}`);
     let handler;
     if (senderType === 'agency') {
@@ -73,8 +73,10 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
     } else {
       handler = await Agent.getFromFingerprint(this.sender);
     }
-    if (trxn.handledBy !== handler.id)
+    if (trxn.handledBy !== handler.id) throw new Error(`Only the transaction handler can update this transaction`);
+    Object.keys(details)
+      .map(key => trxn[key] = details[key]);
     
+    await trxn.save();
   }
-
 }
