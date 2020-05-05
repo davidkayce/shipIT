@@ -1,37 +1,36 @@
 {
-  "name": "DavidKayce-ShipIT",
+  "name": "clearIt",
   "version": "0.1.0",
+  "description": "Bootstrap project for Chaincodes clearIt",
   "files": [
     "dist/*"
   ],
-  "scripts": {
-    "install": "npm-run-all -s lerna:install",
-    "upgrade": "npm --depth 9999 update && npx npm-check-updates -u && npm i",
-    "env:restart": "hurl new -o 5",
-    "test": "npm-run-all -s lerna:test",
-    "test:e2e": "npm-run-all -s lerna:test:e2e",
-    "env:clean": "hurl clean",
-    "cc:start": "f() { npm run cc:package -- $1; npm run cc:install $1 $2; }; f",
-    "cc:upgrade": "f() { npm run cc:package -- $1; hurl upgrade ${3:-$1} node $2  -P ./chaincode-$1; }; f",
-    "cc:start:debug": "f() { npm run cc:package -- $1; npm run cc:install:debug $1 $2; }; f",
-    "lerna:install": "lerna bootstrap",
-    "lerna:build": "lerna run build",
-    "cc:package": "f() { npm run lerna:build; chaincode-manager --update --config ./$1.config.json --output ./chaincode-$1 package; }; f",
-    "cc:install": "f() { hurl install ${2:-$1} node -P ./chaincode-$1; }; f",
-    "cc:install:debug": "f() { hurl install ${2:-$1} node -P ./chaincode-$1 --debug; }; f",
-    "lerna:test": "lerna run test --stream",
+  "scripts": { 
+    "install": "npm-run-all -s lerna:install", 
+    "env:restart": "hurl new -u 3", 
+    "test": "npm-run-all -s lerna:test", 
+    "test:e2e": "npm-run-all -s lerna:test:e2e", 
+    "env:clean": "hurl clean", 
+    "cc:start": "f() { npm run cc:package -- $1; npm run cc:install $1 $2; }; f", 
+    "cc:upgrade": "f() { npm run cc:package -- $1; hurl upgrade ${3:-$1} node $2  -P ./chaincode-$1; }; f", 
+    "cc:start:debug": "f() { npm run cc:package -- $1; npm run cc:install:debug $1 $2; }; f", 
+    "===================INTERNALS===================": "===================NO NEED TO CALL THEM DIRECTLY===================", 
+    "lerna:install": "lerna bootstrap", 
+    "lerna:build": "lerna run build", 
+    "cc:package": "f() { npm run lerna:build; chaincode-manager --update --config ./$1.config.json --output ./chaincode-$1 package; }; f", 
+    "cc:install": "f() { hurl install ${2:-$1} node -P ./chaincode-$1; }; f", 
+    "cc:install:debug": "f() { hurl install ${2:-$1} node -P ./chaincode-$1 --debug; }; f", 
+    "lerna:test": "lerna run test --stream", 
     "lerna:test:e2e": "lerna run test:e2e --stream"
   },
-  "devDependencies": {
-    "@worldsibu/convector-adapter-mock": "~1.3.8",
-    "@worldsibu/convector-platform-fabric": "~1.3.8",
-    "@worldsibu/hurley": "~1.1.4",
-    "fabric-ca-client": "^2.1.0",
-    "fabric-client": "~1.4.8",
-    "lerna": "^3.20.2",
-    "npm-run-all": "~4.1.5"
-  },
-  "dependencies": {
-    "@types/yup": "^0.26.33"
-  }
+  "devDependencies": {  
+    "lerna": "~3.13.0",  
+    "@worldsibu/convector-adapter-mock": "~1.3.6",  
+    "@worldsibu/convector-platform-fabric": "~1.3.6",  
+    "@worldsibu/hurley": "~1.1.1",  
+    "fabric-ca-client": "~1.4.0",  
+    "fabric-client": "~1.4.0",  
+    "npm-run-all": "~4.1.5" 
+  } 
 }
+
