@@ -90,4 +90,9 @@ export class Transaction extends ConvectorModel<Transaction> {
   @Required()
   @Validate(yup.string())
   public createdBy: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
+  public handledBy: string;
 }

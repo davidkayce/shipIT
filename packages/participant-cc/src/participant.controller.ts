@@ -9,64 +9,41 @@ import {
 
 import { User } from './user.model';
 import { Agent } from './agents.model';
+import { Agency } from './agency.model';
+
+enum Participants {
+  user = User,
+  agent = Agent,
+  agency = Agency
+}
 
 @Controller('participant')
 export class ParticipantController extends ConvectorController<ChaincodeTx> {
   @Invokable()
-  public async registerUser(
-    @Param(User)
-    user: User
+  public async registerParticipant(
+    participant: any,
+    @Param(yup.string().oneOf(['user', 'agent', 'agency']))
+    type: string
   ) {
-    const existing = await User.getOne(user.id);
-    if (existing.id) {
-      throw new Error(`Participant with id ${user.id} has been already registered`);
-    }
+    const existing = await Participants[type].getOne(participant.id);
+    if (existing.id) throw new Error(`Participant with id ${user.id} has been already registered`);
 
-    user.identity = this.sender;
-    await user.save();
-    this.tx.stub.setEvent('UserRegister', { user });
-  }
-
-  @Invokable()
-  public async registerAgent(
-    @Param(Agent)
-    agent: Agent
-  ) {
-    const existing = await Agent.getOne(agent.id);
-    if (existing.id) {
-      throw new Error(`Participant with id ${agent.id} has been already registered`);
-    }
-
-    agent.identity = this.sender;
-    await agent.save();
-    this.tx.stub.setEvent('UserRegister', { agent });
+    participant.identity = this.sender;
+    await participant.save();
+    this.tx.stub.setEvent('ParticipantRegister', { participant });
   }
 
 
   @Invokable()
-  public async getUserDetails(
+  public async getParticipantDetails(
     @Param(yup.string())
-    id: string
+    id: string,
+    @Param(yup.string().oneOf(['user', 'agent', 'agency']))
+    type: string
   ) {
-    const existing = await User.getOne(id);
-    if (!existing.id) {
-      throw new Error(`No producer was found with id ${id}`);
-    }
-
-    return existing.toJSON() as User;
-  }
-
-  @Invokable()
-  public async getAgentDetails(
-    @Param(yup.string())
-    id: string
-  ) {
-    const existing = await Agent.getOne(id);
-    if (!existing.id) {
-      throw new Error(`No producer was found with id ${id}`);
-    }
-
-    return existing.toJSON() as Agent;
+    const existing = await Participants[type].getOne(id);
+    if (!existing.id) throw new Error(`No ${type} was found with id ${id}`);
+    return existing.toJSON() as Participants[type];
   }
 
 
@@ -78,5 +55,10 @@ export class ParticipantController extends ConvectorController<ChaincodeTx> {
   @Invokable()
   public async getAllAgents() {
     return (await Agent.getAll()).map(p => p.toJSON() as Agent);
+  }
+
+  @Invokable()
+  public async getAllAgencies() {
+    return (await Agency.getAll()).map(p => p.toJSON() as Agency);
   }
 }
