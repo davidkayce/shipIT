@@ -74,6 +74,8 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
       handler = await Agent.getFromFingerprint(this.sender);
     }
     if (trxn.handledBy !== handler.id) throw new Error(`Only the transaction handler can update this transaction`);
+    trxn.modifiedBy = handler.id;
+    trxn.modified = Date.now();
     Object.keys(details)
       .map(key => trxn[key] = details[key]);
     
