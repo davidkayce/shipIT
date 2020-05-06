@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { controller, post, get, put, patch } from './decorators';
+import { controller, post, get } from './decorators';
 import { ParticipantControllerBackEnd } from '../convector';
 
 @controller('/participant')
