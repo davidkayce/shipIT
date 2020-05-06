@@ -7,13 +7,10 @@ const app: express.Application = express();
 const port = serverPort;
 
 expressWs(app);
-// import router from './controllers/router';
-
 app.use(bodyParser.urlencoded({
   extended: true,
   limit: '40mb'
 }));
-
 app.use(bodyParser.json({ limit: '40mb' }));
 
 app.use((req, res, next) => {
@@ -23,8 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', router);
-
+app.use(express.Router());
 app.listen(port, () => console.log('Server started in port' + port));
 
 module.exports = app;
