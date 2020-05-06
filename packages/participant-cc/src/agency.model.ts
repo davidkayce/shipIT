@@ -24,17 +24,9 @@ export class Agency extends ConvectorModel<Agency> {
   @Required()
   public readonly type = 'com.clearit.agent';
 
-  @ReadOnly()
-  @Required()
-  @Validate(yup.mixed().oneOf(['Agent', 'Bank', 'Customs']))
-  public agentType: string;
 
   @Validate(yup.string())
   public name: string;
-
-  @Required()
-  @Validate(yup.string())
-  public id: string;
 
   @Required()
   @Validate(yup.boolean())
@@ -42,9 +34,6 @@ export class Agency extends ConvectorModel<Agency> {
 
   @Validate(yup.string())
   public bankId: string;
-
-  @Validate(yup.string())
-  public crffnNumber: string;
 
   @Validate(yup.string())
   public customsOfficeCode: string;

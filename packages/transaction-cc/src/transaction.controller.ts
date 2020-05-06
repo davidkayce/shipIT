@@ -53,7 +53,7 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
     }
     if (trxn.handledBy !== handler.id) throw new Error(`Only the transaction handler can transfer this transaction`);
     trxn.handledBy = to;
-    await trxn.save(); 
+    await trxn.save();
   }
 
   @Invokable()
@@ -74,11 +74,11 @@ export class TransactionController extends ConvectorController<ChaincodeTx> {
       handler = await Agent.getFromFingerprint(this.sender);
     }
     if (trxn.handledBy !== handler.id) throw new Error(`Only the transaction handler can update this transaction`);
-    trxn.modifiedBy = handler.id;
-    trxn.modified = Date.now();
+    trxn.updatedBy = handler.id;
+    trxn.updated = Date.now();
     Object.keys(details)
       .map(key => trxn[key] = details[key]);
-    
+
     await trxn.save();
   }
 }

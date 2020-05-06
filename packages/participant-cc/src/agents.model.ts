@@ -24,33 +24,34 @@ export class Agent extends ConvectorModel<Agent> {
   @Required()
   public readonly type = 'com.clearit.agent';
 
-  @ReadOnly()
-  @Required()
-  @Validate(yup.mixed().oneOf(['Agent', 'Bank', 'Customs']))
-  public agentType: string;
-
-  @Validate(yup.string())
-  public name: string;
-
-  @Required()
-  @Validate(yup.string())
-  public id: string;
-
   @Required()
   @Validate(yup.boolean())
   public isEnabled: boolean;
 
   @Validate(yup.string())
-  public bankId: string;
+  public name: string;
+
+  @Validate(yup.string())
+  public company: string;
 
   @Validate(yup.string())
   public crffnNumber: string;
 
   @Validate(yup.string())
-  public customsOfficeCode: string;
+  public registrationNumber: string;
 
-  @Validate(yup.string())
-  public customsOfficeName: string;
+
+  @Required()
+  @Validate(yup.string().oneOf(['percent', 'flat']))
+  public surchargeType: string;
+
+  @Required()
+  @Validate(yup.string().oneOf(['percent', 'flat']))
+  public surchargeAmount: string;
+
+  @Required()
+  @Validate(yup.string().oneOf(['percent', 'flat']))
+  public surchargePercent: string;
 
   @Required()
   @Validate(yup.string())

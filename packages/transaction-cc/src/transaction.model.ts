@@ -12,16 +12,22 @@ export class Transaction extends ConvectorModel<Transaction> {
   @Required()
   public readonly type = "com.clearit.transaction";
 
-  invoiceNo;
-
   @ReadOnly()
   @Required()
   @Validate(yup.string())
   public bolReference: string;
 
+  @Required()
+  @Validate(yup.number().min(0))
+  public provisionalBill: number;
+
+  @Default(0)
+  @Validate(yup.string().min(0))
+  public amountCharged: number;
+
   @ReadOnly()
   @Required()
-  @Validate(yup.mixed().oneOf(["Import", "Export"]))
+  @Validate(yup.mixed().oneOf(["import", "export"]))
   public trxnType: string;
 
   @ReadOnly()
@@ -40,7 +46,7 @@ export class Transaction extends ConvectorModel<Transaction> {
   public containerNumber: string;
 
   @Required()
-  @Validate(yup.integer())
+  @Validate(yup.number())
   public numberOfContainers: number;
 
   @ReadOnly()
@@ -63,7 +69,7 @@ export class Transaction extends ConvectorModel<Transaction> {
           .object()
           .shape({
             biller: yup.string().required(),
-            amount: yup.integer().required(),
+            amount: yup.number().required(),
             invoiceNo: yup.string().required(),
           })
       )
@@ -73,13 +79,11 @@ export class Transaction extends ConvectorModel<Transaction> {
   //Utils
   @Required()
   @Validate(yup.number())
-  /** Date in which it was modified. */
-  public modified: number;
+  public updated: number;
 
   @Required()
   @Validate(yup.string())
-  /** Last user that modified it. */
-  public modifiedBy: string;
+  public updatedBy: string;
 
   @ReadOnly()
   @Required()
