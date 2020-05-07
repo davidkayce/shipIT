@@ -67,3 +67,5 @@ dist
 
 # Generated chaincode packages
 chaincode-*
+
+package.json

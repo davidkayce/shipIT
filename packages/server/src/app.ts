@@ -1,12 +1,10 @@
 import * as express from 'express';
-import * as expressWs from 'express-ws';
 import * as bodyParser from 'body-parser';
 import { port as serverPort } from './env';
 
 const app: express.Application = express();
 const port = serverPort;
 
-expressWs(app);
 app.use(bodyParser.urlencoded({
   extended: true,
   limit: '40mb'
