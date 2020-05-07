@@ -1,8 +1,9 @@
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
+import express from 'express';
+import bodyParser from 'body-parser';
 import { port as serverPort } from './env';
+import { router } from './controllers/decorators';
 
-const app: express.Application = express();
+const app = express();
 const port = serverPort;
 
 app.use(bodyParser.urlencoded({
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.Router());
+app.use(router);
 app.listen(port, () => console.log('Server started in port' + port));
 
 module.exports = app;

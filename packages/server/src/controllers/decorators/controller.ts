@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import "reflect-metadata";
 import { MetaDataKeys as Keys, RouteMethods } from "./utils";
 export const router = express.Router();
