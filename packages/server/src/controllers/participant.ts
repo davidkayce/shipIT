@@ -80,11 +80,11 @@ export class Participant {
       res.status(500).send(ex);
     }
   };
-  @post('/users/register')
+  @post('/agency/register')
   private registerAgency = async (req: Request, res: Response) => {
     try {
       let params = req.body;
-      res.status(200).send(await ParticipantControllerBackEnd.registerUser(params.agency));
+      res.status(200).send(await ParticipantControllerBackEnd.registerAgency(params.agency));
     } catch (ex) {
       res.status(500).send(ex);
     }
