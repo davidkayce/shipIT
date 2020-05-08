@@ -2,9 +2,18 @@ version: '3.4'
 
 services:
   fabric:
-    image: fabric
-    build: .
-    environment:
-      NODE_ENV: production
+    container_name: shipIT-app # How the container will appear when listing containers from the CLI
+    image: node:10.15.0 # The <container-name>:<tag-version> of the container, in this case the tag version aligns with the version of node
+    user: org1 
+    working_dir: "/fabric" # Where to container will assume it should run commands and where you will start out if you go inside the container
+    networks:
+    - fabric 
     ports:
-      - 3000
+    - "5000:5000" 
+    - "5084:5084" 
+    volumes:
+    - ./:/fabric 
+    command: "npm run setup" 
+
+networks:
+  fabric:

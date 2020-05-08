@@ -14,10 +14,9 @@ export const networkProfile = process.env.NETWORKPROFILE || '/' + homedir +
   '/hyperledger-fabric-network/network-profiles/' +
   identityOrg + '.network-profile.yaml';
 
-export const port = process.env.PORT || 8000;
 
 // Default to common values
-export const couchDBView = process.env.COUCHDBVIEW || 'ch1_coffee';
+export const couchDBView = process.env.COUCHDBVIEW || 'ch1_transaction';
 export const couchDBProtocol = process.env.COUCHDB_PROTOCOL || 'http';
 export const couchDBHost = process.env.COUCHDB_HOST || 'localhost';
 export const couchDBPort = process.env.COUCHDB_PORT || 5084;

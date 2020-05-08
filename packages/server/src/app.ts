@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { port as serverPort } from './env';
 import { router } from './controllers/decorators';
 
+// Controllers
+import './controllers/participant';
+import './controllers/transaction';
+
 const app = express();
-const port = serverPort;
+const port = 5000;
 
 app.use(bodyParser.urlencoded({
   extended: true,
