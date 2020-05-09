@@ -1,4 +1,13 @@
 {
   "packages": ["packages/*"],
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "bootstrap": {
+      "hoist": true,
+      "nohoist": [
+        "@types/jasmine",
+        "@types/jasminewd2",
+        "@types/node",
+        "@angular"
+      ]
+    }
 }

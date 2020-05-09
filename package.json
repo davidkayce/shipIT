@@ -6,8 +6,8 @@
     "dist/*"
   ],
   "scripts": {
-    "setup":" npm install && npm run env:restart && npm run cc:start -- transaction && && npm run server-start",
-    "server-start": "cd ./packages/server && npm start",
+    "start": "lerna run start --scope server --stream",
+    "build": "node ./update-paths.js",
     "install": "npm-run-all -s lerna:install",
     "env:restart": "hurl new",
     "test": "npm-run-all -s lerna:test",
