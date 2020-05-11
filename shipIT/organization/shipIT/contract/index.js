@@ -1,8 +1,4 @@
-/*
-SPDX-License-Identifier: Apache-2.0
-*/
 
 'use strict';
-
-const cpcontract = require('./lib/papercontract.js');
-module.exports.contracts = [cpcontract];
+const trxncontract = require('./lib/transactioncontract.js');
+module.exports.contracts = [trxncontract];

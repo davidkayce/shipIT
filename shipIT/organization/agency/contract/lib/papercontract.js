@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 // Fabric smart contract classes
 const { Contract, Context } = require('fabric-contract-api');
 
-// PaperNet specifc classes
+// shipitnet specifc classes
 const CommercialPaper = require('./paper.js');
 const PaperList = require('./paperlist.js');
 
@@ -32,7 +32,7 @@ class CommercialPaperContract extends Contract {
 
     constructor() {
         // Unique namespace when multiple contracts per chaincode file
-        super('org.papernet.commercialpaper');
+        super('org.shipitnet.commercialpaper');
     }
 
     /**

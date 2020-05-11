@@ -5,7 +5,7 @@ The full tutorial, including full scenario details and line by line code walk-th
 
 ## Scenario
 
-In this tutorial two organizations, shipIT and agency, trade commercial paper with each other using 'PaperNet', a Hyperledger Fabric blockchain network.
+In this tutorial two organizations, shipIT and agency, trade commercial paper with each other using 'shipitnet', a Hyperledger Fabric blockchain network.
 
 Once you’ve set up a basic network, you’ll act as Isabella, an employee of shipIT, who will issue a commercial paper on its behalf. You’ll then switch hats to take the role of Balaji, an employee of agency, who will buy this commercial paper, hold it for a period of time, and then redeem it with shipIT for a small profit.
 
@@ -160,7 +160,7 @@ peer chaincode invoke -o localhost:7050  --ordererTLSHostnameOverride orderer.ex
                                 --peerAddresses localhost:7051 --tlsRootCertFiles ${PEER0_ORG1_CA} \
                                 --peerAddresses localhost:9051 --tlsRootCertFiles ${PEER0_ORG2_CA} \
                                 --channelID mychannel --name papercontract \
-                                -c '{"Args":["org.papernet.commercialpaper:instantiate"]}' ${PEER_ADDRESS_ORG1} ${PEER_ADDRESS_ORG2} \
+                                -c '{"Args":["org.shipitnet.commercialpaper:instantiate"]}' ${PEER_ADDRESS_ORG1} ${PEER_ADDRESS_ORG2} \
                                 --tls --cafile $ORDERER_CA --waitForEvent
 
 peer chaincode query -o localhost:7050  --ordererTLSHostnameOverride orderer.example.com \

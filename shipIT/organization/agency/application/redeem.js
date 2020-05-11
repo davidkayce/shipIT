@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
  * This application has 6 basic steps:
  * 1. Select an identity from a wallet
  * 2. Connect to network gateway
- * 3. Access PaperNet network
+ * 3. Access shipitnet network
  * 4. Construct request to issue commercial paper
  * 5. Submit transaction
  * 6. Process response
@@ -53,15 +53,15 @@ async function main() {
 
     await gateway.connect(connectionProfile, connectionOptions);
 
-    // Access PaperNet network
+    // Access shipitnet network
     console.log('Use network channel: mychannel.');
 
     const network = await gateway.getNetwork('mychannel');
 
     // Get addressability to commercial paper contract
-    console.log('Use org.papernet.commercialpaper smart contract.');
+    console.log('Use org.shipitnet.commercialpaper smart contract.');
 
-    const contract = await network.getContract('papercontract', 'org.papernet.commercialpaper');
+    const contract = await network.getContract('papercontract', 'org.shipitnet.commercialpaper');
 
     // redeem commercial paper
     console.log('Submit commercial paper redeem transaction.');

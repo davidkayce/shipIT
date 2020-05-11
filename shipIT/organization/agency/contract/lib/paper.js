@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 'use strict';
 
 // Utility class for ledger state
-const State = require('./../ledger-api/state.js');
+const State = require('../../../shared/ledger-api/state.js');
 
 // Enumerate commercial paper state values
 const cpState = {
@@ -95,7 +95,7 @@ class CommercialPaper extends State {
     }
 
     static getClass() {
-        return 'org.papernet.commercialpaper';
+        return 'org.shipitnet.commercialpaper';
     }
 }
 
