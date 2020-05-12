@@ -31,7 +31,7 @@ async function main() {
 
     // complete transaction
     console.log('Completing transaction.');
-    const completeResponse = await contract.submitTransaction('complete', 'shipIT', '00001', 'shipIT', 'agency', '4900000', '2020-05-31');
+    const completeResponse = await contract.submitTransaction('complete', 'shipIT', '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d', 300000, 'agency');
 
     // process response
     console.log('Process complete transaction response.');
@@ -43,7 +43,6 @@ async function main() {
     console.log(`Error processing transaction. ${error}`);
     console.log(error.stack);
   } finally {
-
     console.log('Disconnecting from Fabric gateway.');
     gateway.disconnect();
   }

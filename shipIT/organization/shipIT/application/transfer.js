@@ -31,7 +31,7 @@ async function main() {
 
     // transfer transaction
     console.log('Transfering transaction.');
-    const completeResponse = await contract.submitTransaction('transfer', 'shipIT', '00001', 'shipIT', 'agency', '4900000', '2020-05-31');
+    const completeResponse = await contract.submitTransaction('transfer', 'shipIT', '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d', 'shipIT', 'agency');
 
     // process response
     console.log('Process transfer transaction response.');

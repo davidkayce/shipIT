@@ -1,6 +1,5 @@
 'use strict';
 const State = require('../../../shared/ledger-api/state.js');
-const { v4: uuidv4 } = require('uuid');
 
 // Enumerate state values
 const trxnState = {
@@ -52,7 +51,7 @@ class Transaction extends State {
   // Factory method to create a transacation
   static createInstance(issuer, bolReference, trxnType, formMNumber, provisionalBill, amountPaid, goodsDescription) {
     let issuedAt = Date.now();
-    let id = uuidv4();
+    let id = '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb62';
     return new Transaction({
       id,
       issuer,

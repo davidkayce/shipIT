@@ -40,7 +40,7 @@ async function main() {
 
     // issue transaction
     console.log('Submitting the issue transaction.');
-    const issueResponse = await contract.submitTransaction('issue', 'shipIT', '00001', '2020-05-31', '2020-11-30', '5000000');
+    const issueResponse = await contract.submitTransaction('issue', 'shipIT', 'BOL347HT23454', 'import', 'M-23H342243', 300000, 0, 'POC Import transaction');
 
     // process response
     console.log('Process issue transaction response.' + issueResponse);
