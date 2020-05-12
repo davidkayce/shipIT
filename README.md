@@ -183,23 +183,16 @@ $ node addToWallet.js
 
 ```
 
-_Buy the paper_
+_Complete the transaction_
 
 ```
-$ node buy.js
-
-```
-
-_Redeem_
-
-```
-$ node redeem.js
+$ node complete.js
 
 ```
 
 ## Clean up
 
-When you are finished using the Fabric test network and the commercial paper smart contract and applications, you can use the following command to clean up the network:
+When you are finished using the Fabric test network and the smart contract and applications, you can use the following command to clean up the network:
 
 ```bash
 $ ./network-clean.sh
