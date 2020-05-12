@@ -1,53 +1,39 @@
 'use strict';
 const State = require('../../../shared/ledger-api/state.js');
+const { v4: uuidv4 } = require('uuid');
 
 // Enumerate state values
 const trxnState = {
   ISSUED: 1,
-  BANK_CLEARED: 2,
-  CUSTOMS_CLEARED: 3,
-  PAID: 4,
-  COMPLETE: 5
+  COMPLETE: 2,
 };
 
-// Transaction class extends State class which will be used 
-// by application and smart contract to define a paper
+// Transaction class extends State class which will be used
+// by application and smart contract to define a transaction
 class Transaction extends State {
   constructor(obj) {
-    super(Transaction.getClass(), [obj.issuer, obj.paperNumber]);
+    super(Transaction.getClass(), [obj.issuer, obj.id]);
     Object.assign(this, obj);
   }
 
   // Getters and setters for transaction details
   getIssuer = () => this.issuer;
 
-  setIssuer = newIssuer => this.issuer = newIssuer;
+  setIssuer = (newIssuer) => (this.issuer = newIssuer);
 
   getOwner = () => this.owner;
 
-  setOwner = newOwner => this.owner = newOwner;
+  setOwner = (newOwner) => (this.owner = newOwner);
 
   // Useful methods to encapsulate transaction states
-  setIssued = () => this.currentState = trxnState.ISSUED;
+  setIssued = () => (this.currentState = trxnState.ISSUED);
 
-  setBankCleared = () => this.currentState = trxnState.BANK_CLEARED;
-
-  setCustomsCleared = () => this.currentState = trxnState.CUSTOMS_CLEARED;
-
-  setPaid = () => this.currentState = trxnState.PAID;
-
-  setCompleted = () => this.currentState = trxnState.COMPLETE;
+  setCompleted = () => (this.currentState = trxnState.COMPLETE);
 
   // Useful methods to confirm transaction states
   isIssued = () => this.currentState === trxnState.ISSUED;
 
-  isBankCleared = () => this.currentState === trxnState.BANK_CLEARED;
- 
-  isCustomsCleared = () => this.currentState === trxnState.CUSTOMS_CLEARED;
-
-  isPaid = () => this.currentState === trxnState.PAID;
-
-  isComplete = () => this.currentState === trxnState.COMPLETE;
+  isCompleted = () => this.currentState === trxnState.COMPLETE;
 
   static fromBuffer(buffer) {
     return Transaction.deserialize(buffer);
@@ -64,8 +50,20 @@ class Transaction extends State {
   }
 
   // Factory method to create a transacation
-  static createInstance(issuer, transactionID, issueAt, , faceValue) {
-    return new Transaction({ issuer, paperNumber, issueDateTime, maturityDateTime, faceValue });
+  static createInstance(issuer, bolReference, trxnType, formMNumber, provisionalBill, amountPaid, goodsDescription) {
+    let issuedAt = Date.now();
+    let id = uuidv4();
+    return new Transaction({
+      id,
+      issuer,
+      bolReference,
+      trxnType,
+      formMNumber,
+      provisionalBill,
+      amountPaid,
+      goodsDescription,
+      issuedAt,
+    });
   }
 
   static getClass() {
@@ -74,4 +72,3 @@ class Transaction extends State {
 }
 
 module.exports = Transaction;
-

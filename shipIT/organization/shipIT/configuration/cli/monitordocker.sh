@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # This script uses the logspout and http stream tools to let you watch the docker containers
-# in action.
-#
-# More information at https://github.com/gliderlabs/logspout/tree/master/httpstream
+# in action. More information at https://github.com/gliderlabs/logspout/tree/master/httpstream
 
 if [ -z "$1" ]; then
    DOCKER_NETWORK=net_test

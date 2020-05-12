@@ -11,16 +11,16 @@ class TransactionList extends StateList {
     this.use(Transaction);
   }
 
-  async addTransaction(paper) {
-    return this.addState(paper);
+  async addTransaction(transaction) {
+    return this.addState(transaction);
   }
 
-  async getTransaction(paperKey) {
-    return this.getState(paperKey);
+  async getTransaction(transactionKey) {
+    return this.getState(transactionKey);
   }
 
-  async updateTransaction(paper) {
-    return this.updateState(paper);
+  async updateTransaction(transaction) {
+    return this.updateState(transaction);
   }
 }
 
