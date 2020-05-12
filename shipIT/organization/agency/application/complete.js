@@ -26,12 +26,11 @@ async function main() {
     console.log('Use network channel: mychannel.');
     const network = await gateway.getNetwork('mychannel');
 
-    // Get addressability to commercial paper contract
     console.log('Use org.shipitnet.transaction smart contract.');
     const contract = await network.getContract('transactioncontract', 'org.shipitnet.transaction');
 
     // complete transaction
-    console.log('Completing transaction transaction.');
+    console.log('Completing transaction.');
     const completeResponse = await contract.submitTransaction('complete', 'shipIT', '00001', 'shipIT', 'agency', '4900000', '2020-05-31');
 
     // process response
