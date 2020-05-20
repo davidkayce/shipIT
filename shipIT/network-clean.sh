@@ -18,7 +18,7 @@ export FABRIC_CFG_PATH="${DIR}/../config"
 
 cd "${DIR}/../network/"
 
-docker kill cliagency clishipIT logspout || true
+docker kill cli agency cli shipIT logspout || true
 ./network.sh down
 
 # remove any stopped containers

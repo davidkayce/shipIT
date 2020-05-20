@@ -36,7 +36,7 @@ async function main() {
 
     // Get addressability to transaction contract
     console.log('Use org.shipitnet.transaction smart contract.');
-    const contract = await network.getContract('transactioncontract');
+    const contract = await network.getContract('trxncontract', 'org.shipitnet.transaction');
 
     // issue transaction
     console.log('Submitting the issue transaction.');

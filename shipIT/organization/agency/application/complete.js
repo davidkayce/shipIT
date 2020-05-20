@@ -27,7 +27,7 @@ async function main() {
     const network = await gateway.getNetwork('mychannel');
 
     console.log('Use org.shipitnet.transaction smart contract.');
-    const contract = await network.getContract('transactioncontract', 'org.shipitnet.transaction');
+    const contract = await network.getContract('trxncontract', 'org.shipitnet.transaction');
 
     // complete transaction
     console.log('Completing transaction.');

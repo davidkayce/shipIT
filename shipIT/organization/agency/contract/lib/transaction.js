@@ -16,29 +16,47 @@ class Transaction extends State {
   }
 
   // Getters and setters for transaction details
-  getIssuer = () => this.issuer;
+  getIssuer () {
+    return this.issuer;
+  } 
 
-  setIssuer = (newIssuer) => (this.issuer = newIssuer);
+  setIssuer (newIssuer) {
+    return this.issuer = newIssuer;
+  }
 
-  getOwner = () => this.owner;
+  getOwner () {
+    return this.owner;
+  }
 
-  setOwner = (newOwner) => (this.owner = newOwner);
+  setOwner (newOwner) {
+    return this.owner = newOwner;
+  }
 
   // Useful methods to encapsulate transaction states
-  setIssued = () => (this.currentState = trxnState.ISSUED);
+  setIssued () {
+    return this.currentState = trxnState.ISSUED;
+  }
 
-  setCompleted = () => (this.currentState = trxnState.COMPLETE);
+  setCompleted () {
+    return this.currentState = trxnState.COMPLETE;
+  }
 
   // Useful methods to confirm transaction states
-  isIssued = () => this.currentState === trxnState.ISSUED;
+  isIssued () {
+    return this.currentState === trxnState.ISSUED;
+  }
 
-  isCompleted = () => this.currentState === trxnState.COMPLETE;
+  isCompleted () {
+    return this.currentState === trxnState.COMPLETE;
+  } 
 
   static fromBuffer(buffer) {
     return Transaction.deserialize(buffer);
   }
 
-  toBuffer = () => Buffer.from(JSON.stringify(this));
+  toBuffer () {
+    return Buffer.from(JSON.stringify(this));
+  }
 
   /**
    * Deserialize a state data to transaction
